@@ -1,59 +1,440 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Mini App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Confecção Bauru | Corte de Tecidos</title>
+  <meta name="description" content="Casa Confecção Nauru em Pederneiras. Serviço de corte de tecidos para confecções. Apenas corte, não fazemos costura. R$7 por peça." />
+
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     body {
-      background: #0f172a;
-      color: #e5e7eb;
-      font-family: Arial;
+      background: #f5f2ee;
+      color: #1f1f1f;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1f1f1f, #3b2f2f);
+      color: white;
+      padding: 22px 8%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      height: 100vh;
+      flex-wrap: wrap;
+      gap: 16px;
     }
-    .card {
-      background: #020617;
-      padding: 20px;
-      border-radius: 12px;
-      width: 300px;
-      box-shadow: 0 0 20px #38bdf8;
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
-    button {
-      background: #38bdf8;
-      border: none;
-      padding: 8px;
-      width: 100%;
-      border-radius: 6px;
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 18px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #d7b98e;
+    }
+
+    .hero {
+      min-height: 82vh;
+      padding: 80px 8%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: center;
+      gap: 40px;
+      background: radial-gradient(circle at top right, #e8d8c3, #f5f2ee 45%);
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 span {
+      color: #8b5e34;
+    }
+
+    .hero-text p {
+      font-size: 1.15rem;
+      max-width: 580px;
+      margin-bottom: 28px;
+      color: #444;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
       cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: #8b5e34;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #6f4725;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1f1f1f;
+      border: 2px solid #ddd;
+    }
+
+    .btn-secondary:hover {
+      border-color: #8b5e34;
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+      border: 1px solid #eadfcc;
+    }
+
+    .hero-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 18px;
+      color: #8b5e34;
+    }
+
+    .price {
+      font-size: 3.2rem;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+
+    .price small {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      background: #f0e4d2;
+      color: #6f4725;
+      border-radius: 999px;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    section {
+      padding: 70px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #555;
+      max-width: 720px;
+      margin: 0 auto 38px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 26px;
+      border-radius: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #eee;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #8b5e34;
+    }
+
+    .notice {
+      background: #1f1f1f;
+      color: white;
+      border-radius: 28px;
+      padding: 36px;
+      text-align: center;
+    }
+
+    .notice strong {
+      color: #d7b98e;
+    }
+
+    .location-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      align-items: center;
+      background: white;
+      padding: 34px;
+      border-radius: 28px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    }
+
+    .address {
+      font-size: 1.1rem;
+    }
+
+    .address strong {
+      color: #8b5e34;
+    }
+
+    .map-placeholder {
+      min-height: 230px;
+      background: linear-gradient(135deg, #d7b98e, #8b5e34);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding: 20px;
+    }
+
+    .contact {
+      background: linear-gradient(135deg, #8b5e34, #3b2f2f);
+      color: white;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 2.3rem;
+      margin-bottom: 14px;
+    }
+
+    .contact p {
+      max-width: 640px;
+      margin: 0 auto 24px;
+    }
+
+    footer {
+      background: #151515;
+      color: #ddd;
+      text-align: center;
+      padding: 24px 8%;
+      font-size: 0.95rem;
+    }
+
+    .top-button {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: #8b5e34;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    }
+
+    .top-button.show {
+      display: block;
+    }
+
+    @media (max-width: 650px) {
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      .hero-card {
+        padding: 24px;
+      }
+
+      .price {
+        font-size: 2.6rem;
+      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="logo">Casa Confecção Bauru</div>
+    <nav>
+      <a href="#servicos">Serviços</a>
+      <a href="#preco">Preço</a>
+      <a href="#localizacao">Localização</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
 
-<div class="card">
-  <h2 id="msg">Carregando...</h2>
-  <button onclick="somar()">Somar 2 + 3</button>
-  <p id="res"></p>
-</div>
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Corte de tecidos com <span>precisão</span> para confecções</h1>
+        <p>
+          A Casa Confecção Bauru oferece serviço de corte de peças para clientes e confecções.
+          Trabalho direto, organizado e focado em qualidade no corte.
+        </p>
+        <div class="buttons">
+          <a class="btn btn-primary" href="#contato">Pedir orçamento</a>
+          <a class="btn btn-secondary" href="#localizacao">Ver endereço</a>
+        </div>
+      </div>
 
-<script>
-fetch("http://127.0.0.1:8000/")
-  .then(r => r.json())
-  .then(d => {
-    document.getElementById("msg").innerText = d.msg
-  })
+      <div class="hero-card" id="preco">
+        <h2>Preço do corte</h2>
+        <p>A partir de:</p>
+        <div class="price">R$ 7 <small>/ peça</small></div>
+        <p>Valor para serviço de corte. O preço pode variar conforme quantidade, tecido, urgência e complexidade do modelo.</p>
+        <span class="tag">Apenas corte • Não fazemos costura</span>
+      </div>
+    </section>
 
-function somar() {
-  fetch("http://127.0.0.1:8000/api/soma?a=2&b=3")
-    .then(r => r.json())
-    .then(d => {
-      document.getElementById("res").innerText =
-        "Resultado: " + d.resultado
-    })
-}
-</script>
+    <section id="servicos">
+      <h2 class="section-title">O que fazemos</h2>
+      <p class="section-subtitle">
+        Serviço voltado para quem precisa cortar tecido com mais rapidez, organização e padrão.
+      </p>
 
+      <div class="cards">
+        <div class="card">
+          <h3>Corte por peça</h3>
+          <p>Corte de peças para confecções, clientes e pequenos lotes de produção.</p>
+        </div>
+        <div class="card">
+          <h3>Atendimento direto</h3>
+          <p>O cliente leva o material e combina os detalhes do serviço de forma simples.</p>
+        </div>
+        <div class="card">
+          <h3>Organização no corte</h3>
+          <p>Trabalho feito com cuidado para manter padrão e evitar desperdício.</p>
+        </div>
+        <div class="card">
+          <h3>Sem costura</h3>
+          <p>Importante: trabalhamos somente com corte. Não realizamos serviço de costura.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="notice">
+        <h2>Informação importante</h2>
+        <p>
+          A Casa Confecção Bauru trabalha com <strong>corte de tecidos</strong>.
+          Não fazemos costura, acabamento ou montagem completa da peça.
+        </p>
+      </div>
+    </section>
+
+    <section id="localizacao">
+      <h2 class="section-title">Localização</h2>
+      <p class="section-subtitle">Atendimento na região do Jardim Mendonça.</p>
+
+      <div class="location-box">
+        <div class="address">
+          <p><strong>Endereço:</strong></p>
+          <p>Rua Valdir Campos, 3102</p>
+          <p>Jardim Mendonça</p>
+          <p>Bauru - SP</p>
+          <br>
+          <a class="btn btn-primary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Rua%20Valdir%20Campos%203102%20Jardim%20Mendon%C3%A7a%20Pederneiras%20SP">
+            Abrir no Google Maps
+          </a>
+        </div>
+        <div class="map-placeholder">
+          Rua Valdir Campos, 3102<br />Jardim Mendonça
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contato">
+      <h2>Faça seu orçamento</h2>
+      <p>
+        Entre em contato para combinar quantidade de peças, tipo de tecido e prazo do serviço.
+      </p>
+      <a class="btn btn-secondary" href="https://wa.me/5514991030425?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Casa%20Confec%C3%A7%C3%A3o%20Nauru.%20Gostaria%20de%20fazer%20um%20or%C3%A7amento%20de%20corte." target="_blank">
+        Chamar no WhatsApp
+      </a>
+      <p style="margin-top: 18px; font-size: 0.9rem; opacity: 0.85;">
+       
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Casa Confecção Bsuru — Corte de tecidos em Bauru/SP.</p>
+  </footer>
+
+  <button class="top-button" id="topButton" title="Voltar ao topo">↑</button>
+
+  <script>
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    const topButton = document.getElementById('topButton');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        topButton.classList.add('show');
+      } else {
+        topButton.classList.remove('show');
+      }
+    });
+
+    topButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
 </body>
 </html>
